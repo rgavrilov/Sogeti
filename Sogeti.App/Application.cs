@@ -15,18 +15,18 @@ namespace Sogeti.App {
     }
 
     public class Controller {
-        private readonly ICsvFileReader fileReader;
+        private readonly ICsvFileReader _fileReader;
 
         public Controller(ICsvFileReader fileReader) {
-            this.fileReader = fileReader;
+            this._fileReader = fileReader;
         }
 
         [Action(Description = "load and process CSV file with presidents")]
         public void Load(
             [NConsoler.Optional("sample.csv", Description = "file to read presidents from")] string inputFilepath) {
-            fileReader.Open();
+            _fileReader.Open();
             string[] line;
-            while ((line = fileReader.GetNextLine()) != null) {
+            while ((line = _fileReader.GetNextLine()) != null) {
                 Console.WriteLine(line.First());
             }
         }
@@ -40,14 +40,14 @@ namespace Sogeti.App {
 
 
     public class CsvFileReader : ICsvFileReader {
-        private int remainingLineCount;
+        private int _remainingLineCount;
 
         public void Open() {
-            remainingLineCount = 5;
+            _remainingLineCount = 5;
         }
 
         public string[] GetNextLine() {
-            if (remainingLineCount-- > 0) {
+            if (_remainingLineCount-- > 0) {
                 return new[] {"A", "B", "C"};
             }
             return null;
