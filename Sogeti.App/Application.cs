@@ -9,50 +9,47 @@ namespace Sogeti.App {
     public class Application {
         public void Run(string[] args) {
             var kernel = new StandardKernel();
-            kernel.Bind<ICsvFileReader>().To<CsvFileReader>();
+            kernel.Bind<IRecordsReader>().To<CsvFileReader>();
             Consolery.Run(kernel.Get<Controller>(), args);
         }
     }
-
+    
     public class Controller {
-        private readonly ICsvFileReader _fileReader;
+        private readonly IRecordsReader _fileReader;
 
-        public Controller(ICsvFileReader fileReader) {
-            this._fileReader = fileReader;
+        public Controller(IRecordsReader fileReader) {
+            _fileReader = fileReader;
         }
 
         [Action(Description = "load and process CSV file with presidents")]
-        public void Load(
-            [NConsoler.Optional("sample.csv", Description = "file to read presidents from")] string inputFilepath) {
-            _fileReader.Open();
-            string[] line;
-            while ((line = _fileReader.GetNextLine()) != null) {
+        public void Process([NConsoler.Optional("sample.csv", Description = "file to read presidents from")] string inputFilepath) {
+            _fileReader.Open(inputFilepath);
+            while (_fileReader.MoveNext()) {
+                var line = _fileReader.CurrentRecord();
                 Console.WriteLine(line.First());
             }
         }
     }
 
-    public interface ICsvFileReader {
-        void Open();
-        string[] GetNextLine();
-        void Close();
+    public interface IRecordsReader {
+        void Open(string filepath);
+        string[] CurrentRecord();
+        bool MoveNext();
     }
-
-
-    public class CsvFileReader : ICsvFileReader {
+    
+    public class CsvFileReader : IRecordsReader {
         private int _remainingLineCount;
 
-        public void Open() {
+        public void Open(string filepath) {
             _remainingLineCount = 5;
         }
 
-        public string[] GetNextLine() {
-            if (_remainingLineCount-- > 0) {
-                return new[] {"A", "B", "C"};
-            }
-            return null;
+        public bool MoveNext() {
+            return _remainingLineCount-- > 0;
         }
 
-        public void Close() {}
+        public string[] CurrentRecord() {
+            return new[] {"A", "B", "C"};
+        }
     }
 }
