@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="ControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RecordFilterTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
