@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using NConsoler;
@@ -24,7 +25,7 @@ namespace Sogeti.App {
 		}
 
 		public bool ShouldPass(Record record) {
-			return new PresidentRecord(record.Fields).HomeState == _state;
+			return new PresidentRecordAdapter(record).HomeState == _state;
 		}
 	}
 
@@ -67,7 +68,7 @@ namespace Sogeti.App {
 
 	public class ByPresidencyComparer : IComparer<Record> {
 		public int Compare(Record x, Record y) {
-			return new PresidentRecord(x.Fields).Presidency - new PresidentRecord(y.Fields).Presidency;
+			return new PresidentRecordAdapter(x).Presidency - new PresidentRecordAdapter(y).Presidency;
 		}
 	}
 
@@ -139,57 +140,85 @@ namespace Sogeti.App {
 		}
 	}
 
-	public class PresidentRecord : Record {
-		public PresidentRecord(IEnumerable<string> fields) : base(new string[9]) {
-			if (fields == null) {
-				throw new ArgumentNullException("fields");
+	public class PresidentRecordAdapter {
+		public PresidentRecordAdapter(Record record) {
+			if (record == null) {
+				throw new ArgumentNullException("record");
 			}
-			List<string> fieldsAsList = fields.ToList();
-			if (fieldsAsList.Count != 9) {
+			if (record.Fields.Length != 9) {
 				throw new ArgumentException(
-					string.Format("President record must contain exactly 9 fields, but {0} given.", fieldsAsList.Count), "fields");
+					string.Format("President record must contain exactly 9 fields, but given record contains {0}.",
+						record.Fields.Length), "record");
 			}
-			int fieldIndex = 0;
-			foreach (string field in fieldsAsList) {
-				base.Fields[fieldIndex] = field;
-				++fieldIndex;
+
+			Presidency = ValidateAndGetNumber(record.Fields[0], "presidency");
+
+			Name = ValidateAndGetString(record.Fields[1], "name");
+
+			Uri wikiUrl;
+			if (!Uri.TryCreate(record.Fields[2], UriKind.RelativeOrAbsolute, out wikiUrl)) {
+				throw new FormatException("Wiki link is not a valid URL.");
 			}
+			WikipediaEntryUrl = wikiUrl;
+
+			TookOffice = ValidateAndGetDateTime(record.Fields[3], "took office date");
+
+			LeftOffice = ValidateAndGetDateTime(record.Fields[4], "left office date");
+
+			Party = ValidateAndGetString(record.Fields[5], "party");
+
+			PortraitImageFilename = ValidateAndGetString(record.Fields[6], "portrait image");
+
+			ThumbnailImageFilename = ValidateAndGetString(record.Fields[7], "thumbnail image");
+
+			HomeState = ValidateAndGetString(record.Fields[8], "home state");
 		}
 
-		public int Presidency {
-			get { return int.Parse(Fields[0]); }
+		private int ValidateAndGetNumber(string value, string fieldName) {
+			int result;
+			if (string.IsNullOrWhiteSpace(value)) {
+				throw new FormatException(string.Format("Value {0} is missing.", fieldName));
+			}
+			if (!int.TryParse(value, out result)) {
+				throw new FormatException(string.Format("Value {0} is not a valid number.", fieldName));
+			}
+			return result;
 		}
 
-		public string Name {
-			get { return Fields[1]; }
+		private DateTime ValidateAndGetDateTime(string value, string fieldName) {
+			DateTime result;
+			if (string.IsNullOrWhiteSpace(value)) {
+				throw new FormatException(string.Format("Value {0} is missing.", fieldName));
+			}
+			if (!DateTime.TryParseExact(value, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out result)) {
+				throw new FormatException(string.Format("Value {0} is invalid.", fieldName));
+			}
+			return result;
 		}
 
-		public Uri WikipediaEntryUrl {
-			get { return new Uri(Fields[2], UriKind.RelativeOrAbsolute); }
+		private string ValidateAndGetString(string field, string fieldName) {
+			if (string.IsNullOrEmpty(field)) {
+				throw new FormatException(string.Format("Value {0} is not specified.", fieldName));
+			}
+			return field;
 		}
 
-		public DateTime TookOffice {
-			get { return DateTime.Parse(Fields[3]); }
-		}
+		public int Presidency { get; private set; }
 
-		public DateTime LeftOffice {
-			get { return DateTime.Parse(Fields[4]); }
-		}
+		public string Name { get; private set; }
 
-		public string Party {
-			get { return Fields[5]; }
-		}
+		public Uri WikipediaEntryUrl { get; private set; }
 
-		public string PortraitImageFilename {
-			get { return Fields[6]; }
-		}
+		public DateTime TookOffice { get; private set; }
 
-		public string ThumbnailImageFilename {
-			get { return Fields[7]; }
-		}
+		public DateTime LeftOffice { get; private set; }
 
-		public string HomeState {
-			get { return Fields[8]; }
-		}
+		public string Party { get; private set; }
+
+		public string PortraitImageFilename { get; private set; }
+
+		public string ThumbnailImageFilename { get; private set; }
+
+		public string HomeState { get; private set; }
 	}
 }

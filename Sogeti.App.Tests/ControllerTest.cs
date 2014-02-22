@@ -32,7 +32,7 @@ namespace Sogeti.App.Tests {
 			Mock<IRecordFilter> filterMock = mocks.Create<IRecordFilter>();
 			filterMock.SetupSequence(it => it.ShouldPass(It.IsNotNull<Record>())).Returns(true).Returns(false).Returns(true);
 
-			var controller = new Controller(readerMock, printerMock, filterMock.Object);
+			var controller = new Controller(readerMock, printerMock);
 			controller.Process(inputFilepath);
 			printerMock.AssertPrintedRecordCount(recordCount - 1);
 		}
