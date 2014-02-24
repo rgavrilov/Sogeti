@@ -33,11 +33,15 @@
     <Reference Include="NConsoler">
       <HintPath>..\packages\NConsoler.2.0.0.0\lib\NConsoler.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.0.1.10\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,11 +50,41 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application.cs" />
+    <Compile Include="ApplicationException.cs" />
+    <Compile Include="ByPresidencyComparer.cs" />
+    <Compile Include="Controller.cs" />
+    <Compile Include="CsvFileReader.cs" />
+    <Compile Include="Exception.cs" />
+    <Compile Include="IConsole.cs" />
+    <Compile Include="IFileSystem.cs" />
     <Compile Include="IRecordFilter.cs" />
+    <Compile Include="IRecordReader.cs" />
+    <Compile Include="IView.cs" />
+    <Compile Include="IViewFactory.cs" />
+    <Compile Include="JsonView.cs" />
+    <Compile Include="Json\PresidentRecordJson.cs" />
+    <Compile Include="Json\ResultJson.cs" />
+    <Compile Include="Name.cs" />
+    <Compile Include="PersonFullName.cs" />
+    <Compile Include="PresidentRecordReader.cs" />
+    <Compile Include="PresidentStateFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Record.cs" />
+    <Compile Include="RecordFilter.cs" />
+    <Compile Include="TextView.cs" />
+    <Compile Include="ViewFactory.cs" />
+    <Compile Include="XmlView.cs" />
+    <Compile Include="Xml\PresidentRecordXml.cs" />
+    <Compile Include="Xml\ProcessResultXml.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sogeti.Common\Sogeti.Common.csproj">
+      <Project>{79ABF64A-642C-40C4-B989-5EF0CB29F9C9}</Project>
+      <Name>Sogeti.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

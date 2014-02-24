@@ -2,88 +2,58 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
-using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 
 namespace Sogeti.App.Tests {
 	[TestFixture]
 	public class ControllerTest {
-		[Test]
-		public void PrintsRecords_NoFilters() {
-			const string inputFilepath = "testFile.csv";
-			const int recordCount = 3;
-			var recordsReaderMock = new RecordsReaderMock(inputFilepath, recordCount, 3);
-			var printerMock = new RecordPrinterMock();
-			var controller = new Controller(recordsReaderMock, printerMock);
-			controller.Process(inputFilepath);
-			printerMock.AssertPrintedRecordCount(recordCount);
+		private MockRepository _mocks;
+		private Mock<IViewFactory> _viewFactoryMock;
+		private Mock<IView<ProcessResult>> _viewMock;
+		private ProcessResult _renderedResult;
+
+		private const string InputFilepath = "testFile.csv";
+
+		[SetUp]
+		public void SetUp() {
+			_mocks = new MockRepository(MockBehavior.Strict);
+			_viewFactoryMock = _mocks.Create<IViewFactory>();
+			_viewFactoryMock.Setup(it => it.CreateView<ProcessResult>("text")).Returns(_viewMock.Object);
+			_viewMock = _mocks.Create<IView<ProcessResult>>();
+			_renderedResult = null;
+			_viewMock.Setup(it => it.Render(It.IsNotNull<ProcessResult>()))
+				.Callback<ProcessResult>(
+					result => { _renderedResult = result; }
+				);
 		}
 
 		[Test]
-		public void PrintsRecords_WithFilters() {
-			const string inputFilepath = "testFile.csv";
+		public void Process_FiltersPresdinetsByState() {
 			const int recordCount = 3;
-			var readerMock = new RecordsReaderMock(inputFilepath, recordCount, 3);
-			var printerMock = new RecordPrinterMock();
-			
-			var mocks = new MockRepository(MockBehavior.Strict);
+			var readerMock = new PresidentsRecordReaderMock(InputFilepath, recordCount);
 
-			Mock<IRecordFilter> filterMock = mocks.Create<IRecordFilter>();
-			filterMock.SetupSequence(it => it.ShouldPass(It.IsNotNull<Record>())).Returns(true).Returns(false).Returns(true);
+			var controller = new Controller(readerMock, _viewFactoryMock.Object);
 
-			var controller = new Controller(readerMock, printerMock);
-			controller.Process(inputFilepath);
-			printerMock.AssertPrintedRecordCount(recordCount - 1);
-		}
-	}
+			controller.Process(InputFilepath, "president-2-homeState", "text");
 
-	public class RecordPrinterMock : IRecordPrinter {
-		private int _printRecordCount;
-
-		public void Print(Record record) {
-			++_printRecordCount;
+			Assert.That(_renderedResult.TotalCount, Is.EqualTo(recordCount));
+			Assert.That(_renderedResult.Records.Count(), Is.EqualTo(1));
+			Assert.That(_renderedResult.Records,
+				Is.EquivalentTo(readerMock.GeneratedRecords.Skip(1).Take(1)));
 		}
 
-		public void AssertPrintedRecordCount(int expectedCount) {
-			Assert.That(_printRecordCount, Is.EqualTo(expectedCount), "Printed record count.");
+		[Test]
+		public void Process_PrintsAllRecordsIfFilterIsNull() {
+			const int recordCount = 3;
+			var readerMock = new PresidentsRecordReaderMock(InputFilepath, recordCount);
+
+			var controller = new Controller(readerMock, _viewFactoryMock.Object);
+
+			controller.Process(InputFilepath, null, "text");
+
+			Assert.That(_renderedResult.TotalCount, Is.EqualTo(recordCount));
+			Assert.That(_renderedResult.Records, Is.EquivalentTo(readerMock.GeneratedRecords));
 		}
-	}
-
-	public class RecordsReaderMock : IRecordsReader {
-		private readonly string _expectedFilepath;
-		private readonly int _fieldCount;
-		private readonly int _recordCount;
-		private int _currentRecordIndex;
-
-		public RecordsReaderMock(string expectedFilepath, int recordCount, int fieldCount) {
-			_recordCount = recordCount;
-			_fieldCount = fieldCount;
-			_expectedFilepath = expectedFilepath;
-		}
-
-		#region IRecordsReader
-
-		public void Open(string filepath) {
-			Assert.That(_expectedFilepath, Is.EqualTo(filepath), "Filepath to open.");
-			_currentRecordIndex = 0;
-		}
-
-		public Record CurrentRecord() {
-			return
-				new Record(
-					Enumerable.Range(1, _fieldCount)
-						.Select(fieldIndex => string.Format("R{0}F{1}", _currentRecordIndex, fieldIndex)));
-		}
-
-		public bool MoveNext() {
-			if (_currentRecordIndex < _recordCount) {
-				++_currentRecordIndex;
-				return true;
-			}
-			return false;
-		}
-
-		#endregion
 	}
 }
