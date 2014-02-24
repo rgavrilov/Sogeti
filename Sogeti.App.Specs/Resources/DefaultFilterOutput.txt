@@ -1,0 +1,2 @@
+3 fname3 lname3 http://link-3 2003-12-31 2004-12-31 party1 portrait3 thumbnail3 New York
+Total count: 4.

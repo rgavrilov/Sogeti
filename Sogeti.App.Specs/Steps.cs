@@ -53,6 +53,12 @@ namespace Sogeti.App.Specs {
 			_fileSystem.Setup(filename, content);
 		}
 
+		[Given(@"resource (.*) as file (.*)")]
+		public void GivenResourceAsFile(string resourceName, string filename) {
+			_fileSystem.Setup(filename, GetResourceByName(resourceName));
+		}
+
+
 		[When(@"I run application with (.*)")]
 		public void WhenIRunApplicationWith(string args) {
 			string[] argsAsArray = args.Split(' ');
@@ -61,7 +67,7 @@ namespace Sogeti.App.Specs {
 
 		[Then(@"the result should match (.*)")]
 		public void ThenTheResultShouldMatch(string expectedOutput) {
-			string expectedOutputContent = ReferenceOutputs.ResourceManager.GetString(expectedOutput, ReferenceOutputs.Culture);
+			string expectedOutputContent = GetResourceByName(expectedOutput);
 
 			Assert.IsNotNull(expectedOutputContent, "BUG IN TEST: expected output resource {0} not found.", expectedOutput);
 
@@ -71,9 +77,15 @@ namespace Sogeti.App.Specs {
 			expectedOutputContent = NormalizeOutput(expectedOutputContent);
 
 			if (!string.Equals(expectedOutputContent, actualOutput)) {
-				System.Console.WriteLine("Actual and expected outputs do not match.\n\nActual:\n{0}\n\nExpected:\n{1}", actualOutput, expectedOutputContent);
+				System.Diagnostics.Debug.WriteLine("Actual and expected outputs do not match.\n\nActual:\n{0}\n\nExpected:\n{1}", actualOutput, expectedOutputContent);
 				Assert.AreEqual(expectedOutputContent, actualOutput);
 			}
+		}
+
+		private static string GetResourceByName(string resourceName) {
+			var content = ReferenceOutputs.ResourceManager.GetString(resourceName, ReferenceOutputs.Culture);
+			Assert.That(content, Is.Not.Null, "Resource {0} not found.", resourceName);
+			return content;
 		}
 
 		private string NormalizeOutput(string output) {

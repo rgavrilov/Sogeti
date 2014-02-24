@@ -32,7 +32,7 @@ namespace Sogeti.App.Specs
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Process", "To get a job\nAs a developer\nI want to demonstrate my application works", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Process", "To get a job\r\nAs a developer\r\nI want to demonstrate my application works", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -80,7 +80,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 14
  testRunner.When("I run application with /i:sample1.csv", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 15
- testRunner.Then("the result should match NoFilterOutput", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the result should match DefaultFilterOutput", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -95,8 +95,8 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
 #line 18
  testRunner.Given("following file sample1.csv:", "1,fname1 lname1,http://link-1,2003-12-31,2004-12-31,party1,portrait1,thumbnail1,h" +
-                    "omeState1\n2,fname2 lname2,http://link-2,2003-12-31,2004-12-31,party2,portrait2,t" +
-                    "humbnail2,homeState2", ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    "omeState1\r\n2,fname2 lname2,http://link-2,2003-12-31,2004-12-31,party2,portrait2," +
+                    "thumbnail2,homeState2", ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 23
  testRunner.When("I run application with /i:sample1.csv /s:homeState2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 24
@@ -121,102 +121,35 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Use real input file")]
-        public virtual void UseRealInputFile()
+        [NUnit.Framework.DescriptionAttribute("Use real input file (default, text output)")]
+        public virtual void UseRealInputFileDefaultTextOutput()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Use real input file", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Use real input file (default, text output)", ((string[])(null)));
 #line 30
 this.ScenarioSetup(scenarioInfo);
-#line hidden
 #line 31
- testRunner.Given("following file presidencs.csv:", "1,George Washington,http://en.wikipedia.org/wiki/George_Washington,1789-04-30,179" +
-                    "7-03-04,Independent ,GeorgeWashington.jpg,thmb_GeorgeWashington.jpg,Virginia\r\n2," +
-                    "John Adams,http://en.wikipedia.org/wiki/John_Adams,1797-03-04,1801-03-04,Federal" +
-                    "ist ,JohnAdams.jpg,thmb_JohnAdams.jpg,Massachusetts\r\n3,Thomas Jefferson,http://e" +
-                    "n.wikipedia.org/wiki/Thomas_Jefferson,1801-03-04,1809-03-04,Democratic-Republica" +
-                    "n ,ThomasJefferson.jpg,thmb_Thomasjefferson.gif,Virginia\r\n4,James Madison,http:/" +
-                    "/en.wikipedia.org/wiki/James_Madison,1809-03-04,1817-03-04,Democratic-Republican" +
-                    " ,JamesMadison.jpg,thmb_JamesMadison.gif,Virginia\r\n5,James Monroe,http://en.wiki" +
-                    "pedia.org/wiki/James_Monroe,1817-03-04,1825-03-04,Democratic-Republican ,JamesMo" +
-                    "nroe.gif,thmb_JamesMonroe.gif,Virginia\r\n6,John Quincy Adams,http://en.wikipedia." +
-                    "org/wiki/John_Quincy_Adams,1825-03-04,1829-03-04,Democratic-Republican/National " +
-                    "Republican ,JohnQuincyAdams.jpg,thmb_JohnQuincyAdams.gif,Massachusetts\r\n7,Andrew" +
-                    " Jackson,http://en.wikipedia.org/wiki/Andrew_Jackson,1829-03-04,1837-03-04,Democ" +
-                    "ratic ,AndrewJackson.gif,thmb_Andrew_jackson.gif,Tennessee\r\n8,Martin Van Buren,h" +
-                    "ttp://en.wikipedia.org/wiki/Martin_Van_Buren,1837-03-04,1841-03-04,Democratic,Ma" +
-                    "rtinVanBuren.jpg,thmb_MartinVanBuren.gif,New York\r\n9,William Henry Harrison,http" +
-                    "://en.wikipedia.org/wiki/William_Henry_Harrison,1841-03-04,1841-04-04,Whig,Willi" +
-                    "amHenryHarrison.jpg,thmb_WilliamHenryHarrison.gif,Ohio\r\n10,John Tyler,http://en." +
-                    "wikipedia.org/wiki/John_Tyler,1841-04-04,1845-03-04,Whig,JohnTyler.jpg,thmb_John" +
-                    "Tyler.jpg,Virginia\r\n11,James K. Polk,http://en.wikipedia.org/wiki/James_K._Polk," +
-                    "1845-03-04,1849-03-04,Democratic ,JamesKnoxPolk.jpg,thmb_JamesKPolk.gif,Tennesse" +
-                    "e\r\n12,Zachary Taylor,http://en.wikipedia.org/wiki/Zachary_Taylor,1849-03-04,1850" +
-                    "-07-09,Whig,ZacharyTaylor.jpg,thmb_ZacharyTaylor.jpg,Louisiana\r\n13,Millard Fillm" +
-                    "ore,http://en.wikipedia.org/wiki/Millard_Fillmore,1850-07-09,1853-03-04,Whig,Mil" +
-                    "lardFillmore.jpg,thmb_MillardFillmore.png,New York\r\n14,Franklin Pierce,http://en" +
-                    ".wikipedia.org/wiki/Franklin_Pierce,1853-03-04,1857-03-04,Democratic ,FranklinPi" +
-                    "erce.jpg,thmb_FranklinPierce.gif,New Hampshire\r\n15,James Buchanan,http://en.wiki" +
-                    "pedia.org/wiki/James_Buchanan,1857-03-04,1861-03-04,Democratic ,JamesBuchanan.jp" +
-                    "g,thmb_JamesBuchanan.gif,Pennsylvania\r\n16,Abraham Lincoln,http://en.wikipedia.or" +
-                    "g/wiki/Abraham_Lincoln,1861-03-04,1865-04-15,Republican/National Union,AbrahamLi" +
-                    "ncoln.jpg,thmb_AbrahamLincoln.jpg,Illinois\r\n17,Andrew Johnson,http://en.wikipedi" +
-                    "a.org/wiki/Andrew_Johnson,1865-04-15,1869-03-04,Democratic/National Union,Andrew" +
-                    "Johnson.jpg,thmb_AndrewJohnson.gif,Tennessee\r\n18,Ulysses S. Grant,http://en.wiki" +
-                    "pedia.org/wiki/Ulysses_S._Grant,1869-03-04,1877-03-04,Republican ,UlyssesSGrant." +
-                    "jpg,thmb_UlyssesSGrant.gif,Ohio\r\n19,Rutherford B. Hayes,http://en.wikipedia.org/" +
-                    "wiki/Rutherford_B._Hayes,1877-03-04,1881-03-04,Republican ,RutherfordBHayes.jpg," +
-                    "thmb_RutherfordBHayes.png,Ohio\r\n20,James A. Garfield,http://en.wikipedia.org/wik" +
-                    "i/James_A._Garfield,1881-03-04,1881-09-19,Republican ,James_Garfield.jpg,thmb_Ja" +
-                    "mes_Garfield.jpg,Ohio\r\n21,Chester A. Arthur,http://en.wikipedia.org/wiki/Chester" +
-                    "_A._Arthur,1881-09-19,1885-03-04,Republican ,ChesterAArthur.gif,thmb_ChesterAArt" +
-                    "hur.gif,New York\r\n22,Grover Cleveland,http://en.wikipedia.org/wiki/Grover_Clevel" +
-                    "and,1885-03-04,1889-03-04,Democratic ,Grover_Cleveland_2.jpg,thmb_Grover_Clevela" +
-                    "nd_2.jpg,New York\r\n23,Benjamin Harrison,http://en.wikipedia.org/wiki/Benjamin_Ha" +
-                    "rrison,1889-03-04,1893-03-04,Republican ,BenjaminHarrison.jpg,thmb_BenjaminHarri" +
-                    "son.gif,Indiana\r\n24,Grover Cleveland (2nd term),http://en.wikipedia.org/wiki/Gro" +
-                    "ver_Cleveland,1893-03-04,1897-03-04,Democratic ,Grover_Cleveland.jpg,thmb_Grover" +
-                    "_Cleveland.jpg,New York\r\n25,William McKinley,http://en.wikipedia.org/wiki/Willia" +
-                    "m_McKinley,1897-03-04,1901-09-14,Republican ,WilliamMcKinley.jpg,thmb_WilliamMcK" +
-                    "inley.gif,Ohio\r\n26,Theodore Roosevelt,http://en.wikipedia.org/wiki/Theodore_Roos" +
-                    "evelt,1901-09-14,1909-03-04,Republican ,TheodoreRoosevelt.jpg,thmb_TheodoreRoose" +
-                    "velt.jpg,New York\r\n27,William Howard Taft,http://en.wikipedia.org/wiki/William_H" +
-                    "oward_Taft,1909-03-04,1913-03-04,Republican ,WilliamHowardTaft.jpg,thmb_WilliamH" +
-                    "owardTaft.jpg,Ohio\r\n28,Woodrow Wilson,http://en.wikipedia.org/wiki/Woodrow_Wilso" +
-                    "n,1913-03-04,1921-03-04,Democratic ,WoodrowWilson.jpg,thmb_WoodrowWilson.gif,New" +
-                    " Jersey\r\n29,Warren G. Harding,http://en.wikipedia.org/wiki/Warren_G._Harding,192" +
-                    "1-03-04,1923-08-02,Republican ,WarrenGHarding.jpg,thmb_WarrenGHarding.gif,Ohio\r\n" +
-                    "30,Calvin Coolidge,http://en.wikipedia.org/wiki/Calvin_Coolidge,1923-08-02,1929-" +
-                    "03-04,Republican ,CoolidgeWHPortrait.jpg,thmb_CoolidgeWHPortrait.gif,Massachuset" +
-                    "ts\r\n31,Herbert Hoover,http://en.wikipedia.org/wiki/Herbert_Hoover,1929-03-04,193" +
-                    "3-03-04,Republican ,HerbertHover.jpg,thmb_HerbertHover.gif,Iowa\r\n32,Franklin D. " +
-                    "Roosevelt,http://en.wikipedia.org/wiki/Franklin_D._Roosevelt,1933-03-04,1945-04-" +
-                    "12,Democratic,FranklinDRoosevelt.jpg,thmb_FranklinDRoosevelt.gif,New York\r\n33,Ha" +
-                    "rry S. Truman,http://en.wikipedia.org/wiki/Harry_S._Truman,1945-04-12,1953-01-20" +
-                    ",Democratic,HarryTruman.jpg,thmb_HarryTruman.jpg,Missouri\r\n34,Dwight D. Eisenhow" +
-                    "er,http://en.wikipedia.org/wiki/Dwight_D._Eisenhower,1953-01-20,1961-01-20,Repub" +
-                    "lican ,Dwight_D_Eisenhower.jpg,thmb_Dwight_D_Eisenhower.jpg,Texas\r\n35,John F. Ke" +
-                    "nnedy,http://en.wikipedia.org/wiki/John_F._Kennedy,1961-01-20,1963-11-22,Democra" +
-                    "tic,John_F_Kennedy.jpg,thmb_John_F_Kennedy.jpg,Massachusetts\r\n36,Lyndon B. Johns" +
-                    "on,http://en.wikipedia.org/wiki/Lyndon_B._Johnson,1963-11-22,1969-01-20,Democrat" +
-                    "ic,Lyndon_B_Johnson.png,thmb_Lyndon_B_Johnson.gif,Texas\r\n37,Richard Nixon,http:/" +
-                    "/en.wikipedia.org/wiki/Richard_Nixon,1969-01-20,1974-08-09,Republican,RichardNix" +
-                    "on.gif,thmb_RichardNixon.gif,California\r\n38,Gerald Ford,http://en.wikipedia.org/" +
-                    "wiki/Gerald_Ford,1974-08-09,1977-01-20,Republican,Gerald_R_Ford.jpg,thmb_Gerald_" +
-                    "R_Ford.jpg,Michigan\r\n39,Jimmy Carter,http://en.wikipedia.org/wiki/Jimmy_Carter,1" +
-                    "977-01-20,1981-01-20,Democratic ,James_E_Carter.jpg,thmb_James_E_Carter.gif,Geor" +
-                    "gia\r\n40,Ronald Reagan,http://en.wikipedia.org/wiki/Ronald_Reagan,1981-01-20,1989" +
-                    "-01-20,Republican ,ReaganWH.jpg,thmb_ReaganWH.jpg,California\r\n41,George H. W. Bu" +
-                    "sh,http://en.wikipedia.org/wiki/George_H._W._Bush,1989-01-20,1993-01-20,Republic" +
-                    "an ,George_H_W_Bush.jpg,thmb_George_H_W_Bush.gif,Texas\r\n42,Bill Clinton,http://e" +
-                    "n.wikipedia.org/wiki/Bill_Clinton,1993-01-20,2001-01-20,Democratic ,Clinton.jpg," +
-                    "thmb_Clinton.jpg,Arkansas\r\n43,George W. Bush,http://en.wikipedia.org/wiki/George" +
-                    "_W._Bush,2001-01-20,2009-01-20,Republican ,George_W_Bush.jpg,thmb_George_W_Bush." +
-                    "jpg,Texas\r\n44,Barack Obama,http://en.wikipedia.org/wiki/Barack_Obama,2009-01-20," +
-                    "2013-01-20,  Democratic   ,Barack_Obama.jpg,thmb_Barack_Obama.jpg,Illinois", ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 78
- testRunner.When("I run application with /i:presidencs.csv", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 79
- testRunner.Then("the result should match RealOutput", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Given("resource Presidents as file presidents.csv", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 32
+ testRunner.When("I run application with /i:presidents.csv", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 33
+ testRunner.Then("the result should match RealOutput_Text", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Use real input file (XML output)")]
+        public virtual void UseRealInputFileXMLOutput()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Use real input file (XML output)", ((string[])(null)));
+#line 35
+this.ScenarioSetup(scenarioInfo);
+#line 36
+ testRunner.Given("resource Presidents as file presidents.csv", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 37
+ testRunner.When("I run application with /i:presidents.csv /f:xml", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 38
+ testRunner.Then("the result should match RealOutput_Xml", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

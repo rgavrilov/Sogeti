@@ -19,13 +19,28 @@ namespace Sogeti.App.Tests {
 		public void SetUp() {
 			_mocks = new MockRepository(MockBehavior.Strict);
 			_viewFactoryMock = _mocks.Create<IViewFactory>();
-			_viewFactoryMock.Setup(it => it.CreateView<ProcessResult>("text")).Returns(_viewMock.Object);
 			_viewMock = _mocks.Create<IView<ProcessResult>>();
 			_renderedResult = null;
 			_viewMock.Setup(it => it.Render(It.IsNotNull<ProcessResult>()))
 				.Callback<ProcessResult>(
 					result => { _renderedResult = result; }
 				);
+			_viewFactoryMock.Setup(it => it.CreateView<ProcessResult>("text")).Returns(_viewMock.Object);
+		}
+
+		[Test]
+		public void Process_IgnoresFirstLineIfInvalid() {
+			const int recordCount = 3;
+			var readerMock = new PresidentsRecordReaderMock(InputFilepath, 3, includeHeaders: true);
+
+			var controller = new Controller(readerMock, _viewFactoryMock.Object);
+
+			controller.Process(InputFilepath, "president-2-homeState", "text");
+
+			Assert.That(_renderedResult.TotalCount, Is.EqualTo(recordCount));
+			Assert.That(_renderedResult.Records.Count(), Is.EqualTo(1));
+			Assert.That(_renderedResult.Records,
+				Is.EquivalentTo(readerMock.AccessedRecords.Skip(1+1).Take(1)));
 		}
 
 		[Test]
@@ -40,7 +55,7 @@ namespace Sogeti.App.Tests {
 			Assert.That(_renderedResult.TotalCount, Is.EqualTo(recordCount));
 			Assert.That(_renderedResult.Records.Count(), Is.EqualTo(1));
 			Assert.That(_renderedResult.Records,
-				Is.EquivalentTo(readerMock.GeneratedRecords.Skip(1).Take(1)));
+				Is.EquivalentTo(readerMock.AccessedRecords.Skip(1).Take(1)));
 		}
 
 		[Test]
@@ -53,7 +68,7 @@ namespace Sogeti.App.Tests {
 			controller.Process(InputFilepath, null, "text");
 
 			Assert.That(_renderedResult.TotalCount, Is.EqualTo(recordCount));
-			Assert.That(_renderedResult.Records, Is.EquivalentTo(readerMock.GeneratedRecords));
+			Assert.That(_renderedResult.Records, Is.EquivalentTo(readerMock.AccessedRecords));
 		}
 	}
 }

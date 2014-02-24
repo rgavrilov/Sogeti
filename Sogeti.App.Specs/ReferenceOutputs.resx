@@ -118,14 +118,20 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="DefaultFilterOutput" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>resources\defaultfilteroutput.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
   <data name="FileNotFoundOutput" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>resources\filenotfoundoutput.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="NoFilterOutput" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>resources\nofilteroutput.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="Presidents" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>resources\presidents.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="RealOutput" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>resources\realoutput.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="RealOutput_Text" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>resources\realoutput_text.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="RealOutput_Xml" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>resources\realoutput_xml.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="WithStateFilterOutput" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>resources\withstatefilteroutput.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>

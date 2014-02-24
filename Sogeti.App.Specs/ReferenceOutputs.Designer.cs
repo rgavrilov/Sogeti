@@ -61,6 +61,16 @@ namespace Sogeti.App.Specs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 3 fname3 lname3 http://link-3 2003-12-31 2004-12-31 party1 portrait3 thumbnail3 New York
+        ///Total count: 4..
+        /// </summary>
+        internal static string DefaultFilterOutput {
+            get {
+                return ResourceManager.GetString("DefaultFilterOutput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File missingFile.csv not found in the file system..
         /// </summary>
         internal static string FileNotFoundOutput {
@@ -70,22 +80,47 @@ namespace Sogeti.App.Specs {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 3, fname3 lname3, http://link-3, 2003-12-31, 2004-12-31, party1, portrait3, thumbnail3, New York
-        ///Total count: 4..
+        ///   Looks up a localized string similar to Presidency ,President ,Wikipedia Entry,Took office ,Left office ,Party ,Portrait,Thumbnail,Home State
+        ///1,George Washington,http://en.wikipedia.org/wiki/George_Washington,1789-04-30,1797-03-04,Independent ,GeorgeWashington.jpg,thmb_GeorgeWashington.jpg,Virginia
+        ///2,John Adams,http://en.wikipedia.org/wiki/John_Adams,1797-03-04,1801-03-04,Federalist ,JohnAdams.jpg,thmb_JohnAdams.jpg,Massachusetts
+        ///3,Thomas Jefferson,http://en.wikipedia.org/wiki/Thomas_Jefferson,1801-03-04,1809-03-04,Democratic-Republican ,Thoma [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string NoFilterOutput {
+        internal static string Presidents {
             get {
-                return ResourceManager.GetString("NoFilterOutput", resourceCulture);
+                return ResourceManager.GetString("Presidents", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 2, fname2 lname2, http://link-2, 2003-12-31, 2004-12-31, party2, portrait2, thumbnail2, homeState2
-        ///Total count: 2..
+        ///   Looks up a localized string similar to 8  Martin Van Buren            http://en.wikipedia.org/wiki/Martin_Van_Buren      1837-03-04 1841-03-04 Democratic MartinVanBuren.jpg     thmb_MartinVanBuren.gif     New York
+        ///13 Millard Fillmore            http://en.wikipedia.org/wiki/Millard_Fillmore      1850-07-09 1853-03-04 Whig       MillardFillmore.jpg    thmb_MillardFillmore.png    New York
+        ///21 Chester A. Arthur           http://en.wikipedia.org/wiki/Chester_A._Arthur     1881-09-19 1885-03-04 Republican ChesterAArthur.gif     thmb_ChesterAArthur.gif  [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string RealOutput {
+        internal static string RealOutput_Text {
             get {
-                return ResourceManager.GetString("RealOutput", resourceCulture);
+                return ResourceManager.GetString("RealOutput_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;
+        ///&lt;Result xmlns:i=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns=&quot;http://schemas.sogeti.com/rgavrilov/2014-02-23&quot;&gt;
+        ///  &lt;Records&gt;
+        ///    &lt;President&gt;
+        ///      &lt;LeftOffice&gt;1841-03-04T00:00:00&lt;/LeftOffice&gt;
+        ///      &lt;Name&gt;Martin Van Buren&lt;/Name&gt;
+        ///      &lt;Presidency&gt;8&lt;/Presidency&gt;
+        ///      &lt;State&gt;New York&lt;/State&gt;
+        ///      &lt;TookOffice&gt;1837-03-04T00:00:00&lt;/TookOffice&gt;
+        ///    &lt;/President&gt;
+        ///    &lt;President&gt;
+        ///      &lt;LeftOffice&gt;1853-03-04T00:00:00&lt;/LeftOffice&gt;
+        ///      &lt;Name&gt;Millard Fillmore&lt;/Name&gt;
+        ///      &lt; [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string RealOutput_Xml {
+            get {
+                return ResourceManager.GetString("RealOutput_Xml", resourceCulture);
             }
         }
         

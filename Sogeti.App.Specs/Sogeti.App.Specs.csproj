@@ -65,20 +65,22 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Process.feature.cs</LastGenOutput>
     </None>
+    <None Include="Resources\Presidents.csv" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ReferenceOutputs.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ReferenceOutputs.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>ReferenceOutputs.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\NoFilterOutput.txt" />
+    <None Include="Resources\DefaultFilterOutput.txt" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\FileNotFoundOutput.txt" />
-    <Content Include="Resources\RealOutput.txt" />
+    <Content Include="Resources\RealOutput_Xml.txt" />
+    <Content Include="Resources\RealOutput_Text.txt" />
     <Content Include="Resources\WithStateFilterOutput.txt" />
   </ItemGroup>
   <ItemGroup>

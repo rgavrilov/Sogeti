@@ -26,6 +26,8 @@ namespace Sogeti.App {
 			[Optional("text", "f", Description = "format to output result in")] string format) {
 			IEnumerable<Record> records = LoadRecords(inputFilepath);
 
+			records = CheckAndRemoveHeaderRecord(records);
+
 			int totalCount = records.Count();
 
 			if (!string.IsNullOrWhiteSpace(filterState)) {
@@ -43,6 +45,19 @@ namespace Sogeti.App {
 
 			IView<ProcessResult> view = _viewFactory.CreateView<ProcessResult>(format);
 			view.Render(result);
+		}
+
+		private IEnumerable<Record> CheckAndRemoveHeaderRecord(IEnumerable<Record> records) {
+			Contract.Assert(records != null);
+			if (records.Any()) {
+				try {
+					new PresidentRecordReader(records.First());
+				}
+				catch (FormatException e) {
+					return records.Skip(1);
+				}
+			}
+			return records;
 		}
 
 		private List<Record> LoadRecords(string inputFilepath) {

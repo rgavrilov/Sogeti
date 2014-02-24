@@ -1,8 +1,0 @@
-﻿8, Martin Van Buren, http://en.wikipedia.org/wiki/Martin_Van_Buren, 1837-03-04, 1841-03-04, Democratic, MartinVanBuren.jpg, thmb_MartinVanBuren.gif, New York
-13, Millard Fillmore, http://en.wikipedia.org/wiki/Millard_Fillmore, 1850-07-09, 1853-03-04, Whig, MillardFillmore.jpg, thmb_MillardFillmore.png, New York
-21, Chester A. Arthur, http://en.wikipedia.org/wiki/Chester_A._Arthur, 1881-09-19, 1885-03-04, Republican, ChesterAArthur.gif, thmb_ChesterAArthur.gif, New York
-22, Grover Cleveland, http://en.wikipedia.org/wiki/Grover_Cleveland, 1885-03-04, 1889-03-04, Democratic, Grover_Cleveland_2.jpg, thmb_Grover_Cleveland_2.jpg, New York
-24, Grover Cleveland (2nd term), http://en.wikipedia.org/wiki/Grover_Cleveland, 1893-03-04, 1897-03-04, Democratic, Grover_Cleveland.jpg, thmb_Grover_Cleveland.jpg, New York
-26, Theodore Roosevelt, http://en.wikipedia.org/wiki/Theodore_Roosevelt, 1901-09-14, 1909-03-04, Republican, TheodoreRoosevelt.jpg, thmb_TheodoreRoosevelt.jpg, New York
-32, Franklin D. Roosevelt, http://en.wikipedia.org/wiki/Franklin_D._Roosevelt, 1933-03-04, 1945-04-12, Democratic, FranklinDRoosevelt.jpg, thmb_FranklinDRoosevelt.gif, New York
-Total count: 44.
