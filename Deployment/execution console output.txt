@@ -1,0 +1,149 @@
+Microsoft Windows [Version 6.1.7601]
+Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
+
+C:\Windows\system32>cd c:\projects\Sogeti\Deployment
+
+c:\projects\Sogeti\Deployment>text
+
+c:\projects\Sogeti\Deployment>sogeti.exe
+8  Martin Van Buren            http://en.wikipedia.org/wiki/Martin_Van_Buren      1837-03-04 1841-03-04 Democratic Marti
+nVanBuren.jpg     thmb_MartinVanBuren.gif     New York
+13 Millard Fillmore            http://en.wikipedia.org/wiki/Millard_Fillmore      1850-07-09 1853-03-04 Whig       Milla
+rdFillmore.jpg    thmb_MillardFillmore.png    New York
+21 Chester A. Arthur           http://en.wikipedia.org/wiki/Chester_A._Arthur     1881-09-19 1885-03-04 Republican Chest
+erAArthur.gif     thmb_ChesterAArthur.gif     New York
+22 Grover Cleveland            http://en.wikipedia.org/wiki/Grover_Cleveland      1885-03-04 1889-03-04 Democratic Grove
+r_Cleveland_2.jpg thmb_Grover_Cleveland_2.jpg New York
+24 Grover Cleveland (2nd term) http://en.wikipedia.org/wiki/Grover_Cleveland      1893-03-04 1897-03-04 Democratic Grove
+r_Cleveland.jpg   thmb_Grover_Cleveland.jpg   New York
+26 Theodore Roosevelt          http://en.wikipedia.org/wiki/Theodore_Roosevelt    1901-09-14 1909-03-04 Republican Theod
+oreRoosevelt.jpg  thmb_TheodoreRoosevelt.jpg  New York
+32 Franklin D. Roosevelt       http://en.wikipedia.org/wiki/Franklin_D._Roosevelt 1933-03-04 1945-04-12 Democratic Frank
+linDRoosevelt.jpg thmb_FranklinDRoosevelt.gif New York
+Total count: 44.
+
+c:\projects\Sogeti\Deployment>pause
+Press any key to continue . . .
+
+c:\projects\Sogeti\Deployment>json
+
+c:\projects\Sogeti\Deployment>sogeti.exe /f:json
+{
+  "Presidents": [
+    {
+      "Presidency": 8,
+      "Name": "Martin Van Buren",
+      "TookOffice": "1837-03-04T00:00:00",
+      "LeftOffice": "1841-03-04T00:00:00",
+      "State": "New York"
+    },
+    {
+      "Presidency": 13,
+      "Name": "Millard Fillmore",
+      "TookOffice": "1850-07-09T00:00:00",
+      "LeftOffice": "1853-03-04T00:00:00",
+      "State": "New York"
+    },
+    {
+      "Presidency": 21,
+      "Name": "Chester A. Arthur",
+      "TookOffice": "1881-09-19T00:00:00",
+      "LeftOffice": "1885-03-04T00:00:00",
+      "State": "New York"
+    },
+    {
+      "Presidency": 22,
+      "Name": "Grover Cleveland",
+      "TookOffice": "1885-03-04T00:00:00",
+      "LeftOffice": "1889-03-04T00:00:00",
+      "State": "New York"
+    },
+    {
+      "Presidency": 24,
+      "Name": "Grover Cleveland (2nd term)",
+      "TookOffice": "1893-03-04T00:00:00",
+      "LeftOffice": "1897-03-04T00:00:00",
+      "State": "New York"
+    },
+    {
+      "Presidency": 26,
+      "Name": "Theodore Roosevelt",
+      "TookOffice": "1901-09-14T00:00:00",
+      "LeftOffice": "1909-03-04T00:00:00",
+      "State": "New York"
+    },
+    {
+      "Presidency": 32,
+      "Name": "Franklin D. Roosevelt",
+      "TookOffice": "1933-03-04T00:00:00",
+      "LeftOffice": "1945-04-12T00:00:00",
+      "State": "New York"
+    }
+  ],
+  "TotalCount": 44
+}
+c:\projects\Sogeti\Deployment>pause
+Press any key to continue . . .
+
+c:\projects\Sogeti\Deployment>xml
+
+c:\projects\Sogeti\Deployment>sogeti.exe /f:xml
+<?xml version="1.0" encoding="IBM437"?>
+<Result xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.sogeti.com/rgavrilov/2014-02-23">
+  <Records>
+    <President>
+      <LeftOffice>1841-03-04T00:00:00</LeftOffice>
+      <Name>Martin Van Buren</Name>
+      <Presidency>8</Presidency>
+      <State>New York</State>
+      <TookOffice>1837-03-04T00:00:00</TookOffice>
+    </President>
+    <President>
+      <LeftOffice>1853-03-04T00:00:00</LeftOffice>
+      <Name>Millard Fillmore</Name>
+      <Presidency>13</Presidency>
+      <State>New York</State>
+      <TookOffice>1850-07-09T00:00:00</TookOffice>
+    </President>
+    <President>
+      <LeftOffice>1885-03-04T00:00:00</LeftOffice>
+      <Name>Chester A. Arthur</Name>
+      <Presidency>21</Presidency>
+      <State>New York</State>
+      <TookOffice>1881-09-19T00:00:00</TookOffice>
+    </President>
+    <President>
+      <LeftOffice>1889-03-04T00:00:00</LeftOffice>
+      <Name>Grover Cleveland</Name>
+      <Presidency>22</Presidency>
+      <State>New York</State>
+      <TookOffice>1885-03-04T00:00:00</TookOffice>
+    </President>
+    <President>
+      <LeftOffice>1897-03-04T00:00:00</LeftOffice>
+      <Name>Grover Cleveland (2nd term)</Name>
+      <Presidency>24</Presidency>
+      <State>New York</State>
+      <TookOffice>1893-03-04T00:00:00</TookOffice>
+    </President>
+    <President>
+      <LeftOffice>1909-03-04T00:00:00</LeftOffice>
+      <Name>Theodore Roosevelt</Name>
+      <Presidency>26</Presidency>
+      <State>New York</State>
+      <TookOffice>1901-09-14T00:00:00</TookOffice>
+    </President>
+    <President>
+      <LeftOffice>1945-04-12T00:00:00</LeftOffice>
+      <Name>Franklin D. Roosevelt</Name>
+      <Presidency>32</Presidency>
+      <State>New York</State>
+      <TookOffice>1933-03-04T00:00:00</TookOffice>
+    </President>
+  </Records>
+  <TotalCount>44</TotalCount>
+</Result>
+c:\projects\Sogeti\Deployment>pause
+Press any key to continue . . .
+
+c:\projects\Sogeti\Deployment>
